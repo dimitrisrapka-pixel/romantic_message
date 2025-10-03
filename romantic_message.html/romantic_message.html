@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ένα Μήνυμα για Σένα</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #fff; /* Λευκό χρώμα για το κείμενο */
+            background-image: url('romantic_sunset_hearts.jpg'); /* Το όνομα του αρχείου της εικόνας φόντου */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Καλύπτει όλο το ύψος της οθόνης */
+            overflow: hidden; /* Αποτρέπει την εμφάνιση scrollbars αν το περιεχόμενο είναι μικρότερο */
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7); /* Σκιά στο κείμενο για καλύτερη αναγνωσιμότητα */
+        }
+
+        .message-container {
+            background-color: rgba(0, 0, 0, 0.4); /* Ελαφρώς διαφανές μαύρο φόντο για το κείμενο */
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 80%;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px); /* Ελαφρύ θόλωμα πίσω από το κείμενο */
+        }
+
+        p {
+            font-size: 1.5em;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Στυλ για το audio player, αν εμφανίζεται */
+        audio {
+            display: none; /* Κρύβουμε τον player για να παίζει μόνο του */
+        }
+
+        /* Μικρή οδηγία για τον χρήστη αν το autoplay δεν λειτουργήσει */
+        .autoplay-info {
+            font-size: 0.9em;
+            margin-top: 20px;
+            color: rgba(255, 255, 255, 0.8);
+            display: none; /* Κρύβεται αρχικά, εμφανίζεται μόνο αν το autoplay αποτύχει */
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .message-container {
+                padding: 20px;
+                max-width: 90%;
+            }
+            p {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="message-container">
+        <p>
+            Να γελάσεις απ' τα βάθη των χρυσών σου ματιών<br>
+            είμαστε μες στο δικό μας κόσμο.<br>
+            Η πιο όμορφη θάλασσα είναι αυτή που δεν έχουμε<br>
+            ακόμα ταξιδέψει.<br>
+            Τα πιο όμορφα παιδιά δεν έχουν μεγαλώσει ακόμα.<br>
+            Κι αυτό που θέλω να σου πω, το πιο όμορφο απ' όλα<br>
+            δε σ' το 'χω πει ακόμα.
+        </p>
+        <div class="autoplay-info">
+            (Αν η μουσική δεν ξεκινήσει αυτόματα, ίσως χρειαστεί να πατήσετε οπουδήποτε στην οθόνη.)
+        </div>
+    </div>
+
+    <audio id="backgroundMusic" autoplay loop>
+        <source src="stand_by_me.mp3" type="audio/mpeg">
+        Ο browser σας δεν υποστηρίζει το στοιχείο audio.
+    </audio>
+
+    <script>
+        // Προσπάθεια να ξεκινήσει η μουσική μόλις φορτώσει η σελίδα
+        window.addEventListener('DOMContentLoaded', (event) => {
+            const music = document.getElementById('backgroundMusic');
+            music.volume = 0.5; // Ρύθμιση έντασης (π.χ. στο 50%)
+            music.play().catch(error => {
+                console.log("Autoplay prevented:", error);
+                // Εμφάνιση οδηγίας αν το autoplay αποτύχει
+                document.querySelector('.autoplay-info').style.display = 'block';
+            });
+        });
+
+        // Προσπάθεια να ξεκινήσει η μουσική με την πρώτη αλληλεπίδραση του χρήστη
+        document.addEventListener('click', function() {
+            const music = document.getElementById('backgroundMusic');
+            if (music.paused) {
+                music.play().catch(error => {
+                    console.log("Play on click prevented:", error);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
+
